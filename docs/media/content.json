@@ -1,0 +1,41 @@
+{
+  "repo": "wsl-toolkit",
+  "accent": "#8AB4FF",
+  "hero": {
+    "command": "bash wsl-toolkit/disk/wsl-space-scan.sh",
+    "output": [
+      { "text": "=== /home/demo subdirs (>200 MB) ===", "style": "muted" },
+      { "text": "2.6G   /home/demo/_kit" },
+      { "text": "1017M  /home/demo/cloudbox" },
+      { "text": "348M   /home/demo/av" },
+      { "text": "=== node_modules trees larger than 200 MB (under ~) ===", "style": "muted" },
+      { "text": "1007M  /home/demo/cloudbox/node_modules", "style": "accent" },
+      { "text": "250M   /home/demo/av/app/node_modules" },
+      { "text": "=== Build/dist trees (target/, dist/, build/, .next/) larger than 200 MB ===", "style": "muted" },
+      { "text": "2.6G   /home/demo/_kit/frames/target", "style": "accent" },
+      { "text": "831M   /home/demo/_kit/frames/target/release/build" }
+    ],
+    "value": "Find what fills a WSL disk before you delete anything."
+  },
+  "diagram": {
+    "direction": "TB",
+    "nodes": [
+      { "id": "scan", "label": "wsl-space-scan.sh", "sublabel": "du and find, read-only" },
+      { "id": "dlist", "label": "docker-list-images.sh", "sublabel": "active vs idle images" },
+      { "id": "clean", "label": "wsl-deep-clean.sh", "sublabel": "--clean PATH ..." },
+      { "id": "dclean", "label": "docker-cleanup.sh", "sublabel": "--prune" },
+      { "id": "fstrim", "label": "fstrim -av", "sublabel": "free blocks in ext4" },
+      { "id": "compact", "label": "compact.ps1", "sublabel": "Windows PowerShell" },
+      { "id": "vhdx", "label": "ext4.vhdx", "sublabel": "smaller file on C:" }
+    ],
+    "edges": [
+      { "from": "scan", "to": "clean", "label": "paths" },
+      { "from": "dlist", "to": "dclean", "label": "review" },
+      { "from": "clean", "to": "fstrim" },
+      { "from": "dclean", "to": "fstrim" },
+      { "from": "fstrim", "to": "compact", "label": "wsl --shutdown" },
+      { "from": "compact", "to": "vhdx", "label": "diskpart" }
+    ],
+    "primary": ["scan", "clean", "fstrim", "compact", "vhdx"]
+  }
+}
