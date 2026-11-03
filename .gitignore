@@ -1,0 +1,4 @@
+.env*
+*.log
+homelab-routing/wireguard/
+homelab-routing/gluetun/
