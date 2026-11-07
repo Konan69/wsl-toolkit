@@ -1,5 +1,7 @@
 # wsl-toolkit
 
+*A janitor's keyring for WSL. Reclaim the gigabytes, restart the stuck, tunnel the rest.*
+
 Shell and PowerShell scripts that find and reclaim disk space in WSL 2, clean up Docker inside WSL, restart WSL and its apps, and route traffic through a WireGuard VPN container.
 
 ![Terminal running wsl-space-scan.sh. It lists home subdirectories over 200 MB, then node_modules trees and build directories over 200 MB, with the largest ones highlighted.](docs/media/hero.gif)
