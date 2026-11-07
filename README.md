@@ -1,6 +1,6 @@
 # wsl-toolkit
 
-*A janitor's keyring for WSL. Reclaim the gigabytes, restart the stuck, tunnel the rest.*
+Get your disk space back from WSL.
 
 Shell and PowerShell scripts that find and reclaim disk space in WSL 2, clean up Docker inside WSL, restart WSL and its apps, and route traffic through a WireGuard VPN container.
 
